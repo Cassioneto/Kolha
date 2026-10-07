@@ -1,0 +1,31 @@
+name = "kolha"
+main = "worker/index.ts"
+compatibility_date = "2025-02-01"
+
+# Frontend SPA servido pelo próprio Worker (dist/ do `npm run build`)
+[assets]
+directory = "./dist"
+not_found_handling = "single-page-application"
+
+[vars]
+MODO_PORTFOLIO = "true"
+CAPACIDADE = "3500"
+FECHAMENTO_MIN = "2975"
+PRECO_FRETE_KZ = "45000"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "kolha-db"
+database_id = "6542764a-3572-4dd0-878c-a3d8b8e528f5"
+
+[[r2_buckets]]
+binding = "FOTOS"
+bucket_name = "kolha-fotos"
+
+[[kv_namespaces]]
+binding = "CACHE"
+id = "a5bec9866fb8485e990f47d63efd6985"
+
+# Cron do cérebro — 5min de manhã (5h-9h), 15min resto do dia
+[triggers]
+crons = ["*/5 5-9 * * *", "*/15 * * * *"]

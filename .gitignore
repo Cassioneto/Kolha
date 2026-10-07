@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.wrangler/
+kolha.db*
+uploads/
+*.log
+*.err
+.DS_Store
