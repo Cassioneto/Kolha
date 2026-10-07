@@ -1,0 +1,20 @@
+{
+  "name": "Kolha — Caminhão Sempre Cheio",
+  "short_name": "Kolha",
+  "description": "Junte sua carga, pague menos frete. Otimização de lotação de caminhão em Angola.",
+  "lang": "pt-AO",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F4F1DE",
+  "theme_color": "#E63946",
+  "icons": [
+    {
+      "src": "/icone.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

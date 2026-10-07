@@ -93,3 +93,38 @@ export function kz(v: number): string {
 export function hora(ts: number): string {
   return new Date(ts * 1000).toLocaleString('pt-AO', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' });
 }
+
+interface CargaPendente {
+  produto: string;
+  qtd: number;
+  rota: string;
+  agregadora_id: string;
+  nome?: string;
+}
+
+// Tia sem rede: a NovaCarga guarda aqui; ao voltar a rede enviamos tudo.
+export async function descarregarPendentes(): Promise<number> {
+  let pend: CargaPendente[] = [];
+  try {
+    pend = JSON.parse(localStorage.getItem('kolha_pendentes') ?? '[]');
+  } catch {
+    return 0;
+  }
+  if (!pend.length) return 0;
+  const resto: CargaPendente[] = [];
+  let enviadas = 0;
+  for (const p of pend) {
+    try {
+      await api.criarOferta(p);
+      enviadas++;
+    } catch {
+      resto.push(p);
+    }
+  }
+  try {
+    localStorage.setItem('kolha_pendentes', JSON.stringify(resto));
+  } catch {
+    /* ignora */
+  }
+  return enviadas;
+}
